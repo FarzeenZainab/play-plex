@@ -1,28 +1,35 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
 import { Text } from "@chakra-ui/react";
-
-interface Game {
-  id: number;
-  name: string;
-}
-
-interface FetchGamesResponse {
-  count: number;
-  results: Game[];
-}
+import useGames from "../hooks/useGames";
 
 const GameGrid = () => {
-  const [games, setGames] = useState<Game[]>();
-  const [errorMessages, setErrorMessages] = useState();
+  /**
+   * ==============================================
+  // This component is involved in making http requests. It knows about end point, it knows about the type of the request we send. This is something we don't want in our components because our components should be primarily responsible for returning markup and handling user interactions at high level.
 
-  useEffect(() => {
-    // here we have to define the interface of the response
-    apiClient
-      .get<FetchGamesResponse>("/games")
-      .then((res) => setGames(res.data.results))
-      .catch((err) => setErrorMessages(err.message));
-  });
+  // here we have two options:
+  // 1. Move the logic of making http request inside a service
+  // 2. Move the entire state and the effect logic inside a hook. So, hooks are not necessarily for sharing functionality across multiple components. We can also use them to separate concerns & make our code more modular and reusable.
+
+  // const [games, setGames] = useState<Game[]>();
+  // const [errorMessages, setErrorMessages] = useState();
+
+  // useEffect(() => {
+  //   // here we have to define the interface of the response
+  //   apiClient
+  //     .get<FetchGamesResponse>("/games")
+  //     .then((res) => setGames(res.data.results))
+  //     .catch((err) => setErrorMessages(err.message));
+  // });
+  * =============================================
+  */
+
+  /**
+   * ==============================================
+   * let's create a custom hook for fetching games
+   * =============================================
+   */
+
+  const { games, errorMessages } = useGames();
 
   return (
     <>
