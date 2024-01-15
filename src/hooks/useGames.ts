@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
-interface Game {
+export interface Game {
   id: number;
   name: string;
+  background_image: string;
 }
+
 interface FetchGamesResponse {
   count: number;
   results: Game[];
@@ -37,3 +39,8 @@ const useGames = () => {
 };
 
 export default useGames;
+
+/**
+ *  The `AbortController` is a web API that provides a way to abort one or more DOM requests as and when needed.
+ *  It is particularly useful in scenarios like canceling or aborting asynchrounous operations
+ */
