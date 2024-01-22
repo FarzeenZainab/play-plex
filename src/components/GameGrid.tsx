@@ -32,7 +32,7 @@ const GameGrid = () => {
    * =============================================
    */
 
-  const { games, errorMessages, isLoading } = useGames();
+  const { data, errorMessages, isLoading } = useGames();
   const skeleton = [1, 2, 3, 4, 5, 6];
 
   return (
@@ -51,7 +51,7 @@ const GameGrid = () => {
         marginRight="auto"
         padding={10}
       >
-        {games?.map((game, index) => (
+        {data?.map((game, index) => (
           <GameCardContainer>
             <GameCard key={index} game={game} />
           </GameCardContainer>
