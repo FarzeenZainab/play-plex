@@ -45,7 +45,7 @@ const GameGrid = () => {
           lg: 3,
           xl: 3,
         }}
-        spacing={10}
+        spacing={3}
         maxWidth={1000}
         marginLeft="auto"
         marginRight="auto"
