@@ -1,3 +1,7 @@
+import { useState } from "react";
+
+import { Genre } from "./hooks/useGenres";
+
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 
 import NavBar from "./components/NavBar";
@@ -5,6 +9,11 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 
 function App() {
+  // TypeScript: this variale can either hold a genre object or null
+  const [selectedGenre, setSeletedGenre] = useState<Genre | null>(null);
+
+  // The component which is holding the state should be responsible updating it.
+
   return (
     <>
       <Grid
@@ -22,11 +31,15 @@ function App() {
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" paddingX="18px">
-            <GenreList />
+            <GenreList
+              onSelectGenre={(genre) => {
+                setSeletedGenre(genre);
+              }}
+            />
           </GridItem>
         </Show>
         <GridItem area="main">
-          <GameGrid />
+          <GameGrid genre={selectedGenre} />
         </GridItem>
       </Grid>
     </>
