@@ -10,10 +10,11 @@ import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
 interface Props {
+  selectedGenre: Genre | null;
   onSelectGenre: (genre: Genre) => void;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data: genres, isLoading, errorMessages } = useGenres();
 
   // When something changes internally inside our component, we tell the parent component about the changes
@@ -44,6 +45,7 @@ const GenreList = ({ onSelectGenre }: Props) => {
                 }}
                 variant="link"
                 fontSize="lg"
+                fontWeight={selectedGenre?.id === genre.id ? 700 : 400}
               >
                 {genre.name}
               </Button>

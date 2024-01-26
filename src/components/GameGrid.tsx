@@ -56,11 +56,13 @@ const GameGrid = ({ genre }: Props) => {
         marginRight="auto"
         padding={10}
       >
-        {data?.map((game, index) => (
-          <GameCardContainer key={index}>
-            <GameCard game={game} />
-          </GameCardContainer>
-        ))}
+        {data &&
+          !isLoading &&
+          data?.map((game, index) => (
+            <GameCardContainer key={index}>
+              <GameCard game={game} />
+            </GameCardContainer>
+          ))}
 
         {isLoading &&
           skeleton.map((item, index) => {
