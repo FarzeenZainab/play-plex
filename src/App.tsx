@@ -7,6 +7,7 @@ import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
+import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
   // TypeScript: this variale can either hold a genre object or null
@@ -40,6 +41,7 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area="main">
+          <PlatformSelector />
           <GameGrid genre={selectedGenre} />
         </GridItem>
       </Grid>
