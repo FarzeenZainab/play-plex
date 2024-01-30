@@ -8,14 +8,41 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import PlatformSelector from "./components/PlatformSelector";
-import { Platform } from "./hooks/useGames";
+import { Game, Platform } from "./hooks/useGames";
+
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+}
 
 function App() {
   // TypeScript: this variale can either hold a genre object or null
-  const [selectedGenre, setSeletedGenre] = useState<Genre | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
-    null
-  );
+
+  // Refactor: Query params
+  /**
+   * Currently we have got two state variables here but, as we add more features we will
+   * need even more variables for tracking things like sort order and search cases.
+   *
+   * Adding a bunch of variables and passing them around is ugly. It causes clutter in our code
+   * and makes it stink
+   *
+   * We should pack related variables inside an object.
+   *
+   * We will use QUERY OBJECT PATTERN.
+   *
+   * In this pattern we will create a query object which will store all the information
+   * we need to query the games
+   *
+   * With this our code will be cleaner and easier to understand.
+   */
+
+  // Old version of passing query params
+  // const [selectedGenre, setSeletedGenre] = useState<Genre | null>(null);
+  // const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+  //   null
+  // );
+
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   // The component which is holding the state should be responsible updating it.
 
@@ -37,19 +64,21 @@ function App() {
         <Show above="lg">
           <GridItem area="aside" paddingX="18px">
             <GenreList
-              selectedGenre={selectedGenre}
+              selectedGenre={gameQuery.genre}
               onSelectGenre={(genre) => {
-                setSeletedGenre(genre);
+                setGameQuery({ ...gameQuery, genre });
               }}
             />
           </GridItem>
         </Show>
         <GridItem area="main">
           <PlatformSelector
-            onSelectPlatform={(platform) => setSelectedPlatform(platform)}
-            selectedPlatform={selectedPlatform}
+            selectedPlatform={gameQuery.platform}
+            onSelectPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
           />
-          <GameGrid selectedPlatform={selectedPlatform} genre={selectedGenre} />
+          <GameGrid gameQuery={gameQuery} />
         </GridItem>
       </Grid>
     </>

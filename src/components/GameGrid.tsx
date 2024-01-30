@@ -4,13 +4,13 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { Genre } from "../hooks/useGenres";
+import { GameQuery } from "../App";
 
 interface Props {
-  genre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
 }
 
-const GameGrid = ({ genre, selectedPlatform }: Props) => {
+const GameGrid = ({ gameQuery }: Props) => {
   /**
    * ==============================================
   // This component is involved in making http requests. It knows about end point, it knows about the type of the request we send. This is something we don't want in our components because our components should be primarily responsible for returning markup and handling user interactions at high level.
@@ -38,7 +38,7 @@ const GameGrid = ({ genre, selectedPlatform }: Props) => {
    * =============================================
    */
 
-  const { data, errorMessages, isLoading } = useGames(genre, selectedPlatform);
+  const { data, errorMessages, isLoading } = useGames(gameQuery);
   const skeleton = [1, 2, 3, 4, 5, 6];
 
   return (
