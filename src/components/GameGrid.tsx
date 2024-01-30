@@ -49,10 +49,9 @@ const GameGrid = ({ gameQuery }: Props) => {
           sm: 1,
           md: 2,
           lg: 3,
-          xl: 3,
+          xl: 4,
         }}
         spacing={3}
-        maxWidth={1000}
         marginLeft="auto"
         marginRight="auto"
         padding={10}
