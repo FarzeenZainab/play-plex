@@ -3,10 +3,12 @@ const getCroppedImageUrl = (
   width: number = 600,
   height: number = 400
 ) => {
+  if (!url) return "";
+
   const target = "media/";
-  const index = url.indexOf(target) + target.length;
-  const croppedUrl = url.slice(0, index);
-  const restOfUrl = url.slice(index);
+  const index = url?.indexOf(target) + target.length;
+  const croppedUrl = url?.slice(0, index);
+  const restOfUrl = url?.slice(index);
 
   return croppedUrl + "crop/" + width + "/" + height + "/" + restOfUrl;
 };
