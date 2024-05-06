@@ -2,7 +2,7 @@
 
 This project is a game-based web application built using React with TypeScript, and the frontend is designed with Chakra UI. The main focus of this project is to demonstrate API integration, allowing users to retrieve a list of games available on different platforms.
 
-[LIVE LINK](play-plex.vercel.app)
+[LIVE LINK](https://play-plex.vercel.app/)
 
 ## Features
 
